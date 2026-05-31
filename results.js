@@ -1,4 +1,4 @@
-const API_BASE = '/api';
+const API_BASE = 'https://pathify-51pd.onrender.com';
 
 let resultsData = [];
 let currentResult = null;
