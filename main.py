@@ -26,6 +26,15 @@ app = FastAPI(title="Career Guidance Questionnaire API")
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    import traceback
+    traceback.print_exc()
+    return JSONResponse(
+        status_code=500,
+        content={"detail": f"Internal Server Error: {str(exc)}", "type": str(type(exc))}
+    )
+
 # ── CORS middleware ───────────────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
