@@ -166,7 +166,7 @@ async def health():
 # ── Session / Start ───────────────────────────────────────────────────────────
 
 @app.post("/session/start")
-@limiter.limit("10/day")
+@limiter.limit("100/day")
 async def start_session(request: Request, req: StartSessionRequest):
     """Start a new session, create a profile, and fetch the root question.
 
