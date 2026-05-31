@@ -1,0 +1,65 @@
+/* ================================
+   animations.css
+   Covers: all @keyframes declarations, float animation,
+   orb breathe animation, marquee scroll, pixel loader,
+   bar fill, modal transitions, delay utilities
+   Used by: index.html, quiz.html, results.html
+   Do NOT add page-specific styles here
+================================ */
+
+/* --- ORB BREATHE --- */
+@keyframes breathe {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 1; }
+  33%       { transform: scale(1.08) translate(10px, -12px); opacity: 0.85; }
+  66%       { transform: scale(0.95) translate(-8px, 8px); opacity: 0.95; }
+}
+
+/* --- HERO FLOAT CARD --- */
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+/* --- MARQUEE --- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* --- PIXEL LOADER --- */
+@keyframes pulse-pixel {
+  0%   { opacity: 0.2; }
+  50%  { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0.2; }
+}
+
+/* --- LOADING TEXT FADE --- */
+@keyframes fade-text {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+/* --- TRAIT TAG FADE UP --- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- SUMMARY SUBTLE PULSE --- */
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* --- DELAY UTILITIES --- */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }

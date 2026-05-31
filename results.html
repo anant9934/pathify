@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pathified — Your Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <link rel="stylesheet" href="css/nav.css"/>
+  <link rel="stylesheet" href="css/results.css"/>
+</head>
+<body>
+
+  <div class="cursor"></div>
+  <div class="cursor-dot"></div>
+
+  <nav class="results-nav">
+    <a href="index.html" class="logo">Pathified</a>
+  </nav>
+
+  <main class="results-container">
+    <div class="results-header reveal">
+      <h1>Your path, <em>mapped.</em></h1>
+      <p>Based on your 25 answers, here's what we found.</p>
+    </div>
+
+    <!-- Cards container -->
+    <div class="results-grid reveal" id="results-grid">
+      <!-- Injected by JS -->
+    </div>
+    <div class="email-results-wrap reveal">
+      <p class="email-results-label">Want to save your results?</p>
+      <div class="email-results-form" id="email-results-form">
+        <input type="email" id="results-email" placeholder="your@email.com"/>
+        <button class="btn-primary" id="results-email-btn">Email my results</button>
+      </div>
+      <p class="email-results-confirm" id="email-confirm">
+        ✓ Results saved — check your inbox shortly.
+      </p>
+    </div>
+    <div class="retake-wrap reveal">
+      <p class="retake-text">Want to try again with different answers?</p>
+      <button class="btn-ghost" id="retake-btn">Retake the quiz</button>
+    </div>
+  </main>
+
+  <!-- Detail Modal -->
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <div class="modal-content">
+      <div class="modal-badge" id="m-rank">Top match</div>
+      <h2 class="modal-title" id="m-field">AI / Machine Learning</h2>
+      <div class="modal-pct" id="m-pct">92%</div>
+      
+      <div class="modal-section-title">Why this fits you</div>
+      <p class="modal-desc" id="m-desc">...</p>
+      
+      <div class="modal-section-title">Strengths</div>
+      <div class="tags-row" id="m-strengths">
+        <!-- Tags injected -->
+      </div>
+      
+      <div class="modal-section-title">Considerations</div>
+      <div class="tags-row neutral" id="m-considerations">
+        <!-- Tags injected -->
+      </div>
+      
+      <div class="modal-footer">
+        <a href="#" class="modal-link disabled">Explore a roadmap for this path &rarr; <br><small>(Coming soon)</small></a>
+        <div class="share-wrap">
+          <button class="share-btn" id="share-btn">Share my result</button>
+          <span class="share-confirm" id="share-confirm">✓ Copied to clipboard</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="config.js"></script>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <span class="theme-icon-light">☀︎</span>
+    <span class="theme-icon-dark">☽</span>
+  </button>
+  <script src="script.js"></script>
+  <script src="results.js"></script>
+</body>
+</html>

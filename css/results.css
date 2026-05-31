@@ -1,0 +1,555 @@
+/* ================================
+   results.css
+   Covers: results page heading/subtext, result cards (all 3),
+   rank label, field name, percentage, path bars on results,
+   modal overlay and blur, modal card, modal close button,
+   strengths tags, considerations tags, roles tags,
+   share/retake buttons, email input on results
+   Used by: results.html only
+   Do NOT add page-specific styles here
+================================ */
+
+/* --- RESULTS CONTAINER --- */
+.results-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 8rem;
+  text-align: center;
+}
+
+/* --- RESULTS HEADING & SUBTEXT --- */
+.results-header h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 400;
+  color: var(--brown);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.results-header em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+.results-header p {
+  font-size: 1.1rem;
+  color: var(--brown-muted);
+  font-weight: 300;
+  margin-bottom: 4rem;
+}
+
+/* --- RESULTS GRID --- */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 2rem;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+/* --- EMAIL RESULTS --- */
+.email-results-wrap {
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.email-results-label {
+  font-size: 0.9rem;
+  color: var(--brown-soft);
+  margin-bottom: 0.75rem;
+}
+
+.email-results-form {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.email-results-form input {
+  flex: 1;
+  max-width: 340px;
+  border: 1px solid rgba(26, 18, 8, 0.15);
+  border-radius: 100px;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--brown);
+}
+
+.email-results-confirm {
+  display: none;
+  margin-top: 0.8rem;
+  color: var(--amber);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* --- RETAKE --- */
+.retake-wrap {
+  text-align: center;
+}
+
+.retake-text {
+  font-size: 0.88rem;
+  color: var(--brown-soft);
+  margin-bottom: 0.75rem;
+}
+
+/* --- RESULT CARDS --- */
+.r-card {
+  background: white;
+  border: 1px solid rgba(26, 18, 8, 0.1);
+  border-radius: 20px;
+  padding: 2.5rem;
+  cursor: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.r-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(200, 131, 10, 0.08);
+  border-color: rgba(200, 131, 10, 0.25);
+}
+
+.r-card.rank-1 {
+  border-color: rgba(200, 131, 10, 0.2);
+  transform: scale(1.02);
+}
+
+.r-card.rank-1:hover {
+  transform: scale(1.02) translateY(-8px);
+}
+
+.r-card.rank-1::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--amber) 0%, rgba(200, 131, 10, 0.4) 100%);
+  border-radius: 20px 20px 0 0;
+}
+
+/* --- RANK LABEL --- */
+.r-rank {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+}
+
+/* --- FIELD NAME --- */
+.r-field {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--brown);
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+
+/* --- PERCENTAGE --- */
+.r-pct {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  color: var(--amber);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.r-desc {
+  font-size: 0.95rem;
+  color: var(--brown-muted);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+/* --- PATH BARS (results page) --- */
+.r-bar-wrap {
+  width: 100%;
+  height: 4px;
+  background: var(--cream-dark);
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+  overflow: clip;
+}
+
+.r-bar-fill {
+  height: 100%;
+  background: var(--amber);
+  width: 0%;
+  border-radius: 100px;
+  transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.r-link {
+  font-size: 0.9rem;
+  color: var(--brown);
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color var(--transition);
+}
+
+.r-card:hover .r-link {
+  color: var(--amber);
+}
+
+/* --- MODAL OVERLAY --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(26, 18, 8, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- MODAL CARD --- */
+.modal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -45%) scale(0.95);
+  background: white;
+  width: 90%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 24px;
+  z-index: 1001;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  padding: 3rem 2.5rem;
+  box-shadow: 0 40px 80px rgba(26, 18, 8, 0.15);
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* --- MODAL CLOSE BUTTON --- */
+.modal-close {
+  position: absolute;
+  top: 1.5rem; right: 2rem;
+  background: transparent;
+  border: none;
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--brown-muted);
+  cursor: none;
+  transition: color var(--transition);
+  padding: 0;
+}
+
+.modal-close:hover {
+  color: var(--amber);
+}
+
+.modal-badge {
+  display: inline-block;
+  background: var(--amber-pale);
+  color: var(--amber);
+  border: 1px solid rgba(200, 131, 10, 0.2);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+.modal-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  color: var(--brown);
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+
+.modal-pct {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 2.5rem;
+}
+
+.modal-section-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.modal-desc {
+  font-size: 1.05rem;
+  color: var(--brown-mid);
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+}
+
+/* --- STRENGTHS TAGS --- */
+.tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.tag {
+  background: var(--amber);
+  color: var(--cream);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* --- CONSIDERATIONS TAGS --- */
+.tags-row.neutral .tag {
+  background: var(--cream);
+  color: var(--brown-soft);
+  border: 1px solid rgba(26, 18, 8, 0.1);
+  font-weight: 400;
+}
+
+/* --- ROLES TAGS --- */
+.modal-roles {
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+.role-tag {
+  display: inline-block;
+  background: transparent;
+  color: var(--amber);
+  border: 1px solid rgba(200, 131, 10, 0.35);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.role-tag:hover {
+  background: rgba(200, 131, 10, 0.08);
+}
+
+.modal-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(26, 18, 8, 0.08);
+}
+
+.modal-link {
+  color: var(--brown-muted);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.modal-link.disabled {
+  pointer-events: none;
+  color: #ccc;
+}
+
+.modal-link small {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* --- SHARE RESULT --- */
+.share-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(26, 18, 8, 0.07);
+}
+
+.share-btn {
+  background: transparent;
+  border: 1px solid var(--amber-border);
+  color: var(--amber);
+  padding: 0.65rem 1.5rem;
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.share-btn:hover {
+  background: var(--amber-light);
+}
+
+.share-confirm {
+  font-size: 0.82rem;
+  color: var(--amber);
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* --- RESULTS RESPONSIVE: MOBILE --- */
+@media (max-width: 639px) {
+  .results-container {
+    padding: 3rem 1.25rem 4rem;
+  }
+
+  .results-header h1 {
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+  }
+
+  .results-header p {
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .email-results-form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .email-results-form input,
+  .email-results-form .btn-primary {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .r-card {
+    padding: 1.25rem;
+  }
+
+  .r-card.rank-1 {
+    transform: none;
+  }
+
+  .r-card.rank-1:hover {
+    transform: translateY(-4px);
+  }
+
+  .r-pct {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  .r-field {
+    font-size: 1.5rem;
+  }
+
+  /* Modal — full screen on mobile */
+  .modal {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    max-width: 100vw;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    transform: none;
+    padding: 1.25rem;
+    overflow-y: auto;
+  }
+
+  .modal.active {
+    transform: none;
+  }
+
+  .modal-close {
+    top: 0.75rem;
+    right: 1rem;
+    font-size: 2rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-title {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+  }
+
+  .modal-pct {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-desc {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag,
+  .role-tag {
+    white-space: normal;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .tags-row {
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-roles {
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-footer {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+  }
+
+  .share-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* --- RESULTS RESPONSIVE: TABLET --- */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .results-container {
+    padding: 3.5rem 2rem 6rem;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .r-card.rank-1 {
+    transform: none;
+  }
+}

@@ -1,0 +1,429 @@
+/* ================================
+   global.css
+   Covers: CSS reset, :root variables, html/body base styles,
+   font imports, overflow-x, utility classes used across pages,
+   custom cursor, touch device overrides, safe image rules
+   Used by: index.html, quiz.html, results.html
+   Do NOT add page-specific styles here
+================================ */
+
+/* --- RESET --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- CSS VARIABLES --- */
+:root {
+  --cream: #f5f0e8;
+  --cream-alt: #ede8de;
+  --brown: #1a1208;
+  --brown-mid: #4a3f2f;
+  --brown-soft: #8a7a66;
+  --amber: #c8830a;
+  --amber-light: rgba(200, 131, 10, 0.12);
+  --amber-border: rgba(200, 131, 10, 0.25);
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --transition: 0.2s ease;
+}
+
+/* --- BASE HTML & BODY --- */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--brown);
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+  transition: opacity 0.3s ease;
+}
+
+/* --- UTILITY: SCROLL REVEAL --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(12);
+}
+
+/* --- UTILITY: BUTTONS --- */
+.btn-primary {
+  background: var(--brown);
+  color: var(--cream);
+  border: none;
+  padding: 1rem 2.2rem;
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: none;
+  transition: background var(--transition), transform 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.btn-primary:hover {
+  background: var(--amber);
+  transform: translateY(-2px);
+}
+
+.btn-primary.btn-lg {
+  font-size: 1.05rem;
+  padding: 1.15rem 3rem;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--brown-mid);
+  border: 1.5px solid rgba(26, 18, 8, 0.18);
+  padding: 1rem 2.2rem;
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 400;
+  cursor: none;
+  transition: border-color var(--transition), color var(--transition), transform 0.15s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+  transform: translateY(-2px);
+}
+
+/* --- UTILITY: SECTION LABEL & TITLE --- */
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1rem;
+}
+
+.section-header {
+  margin-bottom: 4rem;
+}
+
+.section-header h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--brown);
+}
+
+/* --- CUSTOM CURSOR --- */
+.cursor {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--amber);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, opacity 0.2s;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--amber);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.05s;
+}
+
+body:has(button:hover) .cursor,
+body:has(a:hover) .cursor {
+  transform: translate(-50%, -50%) scale(1.6);
+  background: rgba(200, 132, 42, 0.08);
+}
+
+/* --- TOUCH DEVICE: DISABLE CURSOR --- */
+@media (hover: none) and (pointer: coarse) {
+  .cursor,
+  .cursor-dot {
+    display: none;
+  }
+
+  body {
+    cursor: auto;
+  }
+
+  button,
+  a,
+  .quiz-option,
+  .r-card,
+  .modal-close {
+    cursor: pointer;
+  }
+}
+
+/* --- MOBILE BASE --- */
+@media (max-width: 639px) {
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  body {
+    font-size: 15px;
+    cursor: auto;
+  }
+
+  .cursor,
+  .cursor-dot {
+    display: none;
+  }
+
+  button,
+  a,
+  .clickable {
+    min-height: 44px;
+  }
+}
+
+/* ================================
+   DARK MODE VARIABLES
+================================ */
+[data-theme="dark"] {
+  --cream: #141210;
+  --cream-alt: #1c1916;
+  --brown: #f0ece4;
+  --brown-mid: #c8bfb0;
+  --brown-soft: #8a7a66;
+  --amber: #c8830a;
+  --amber-light: rgba(200, 131, 10, 0.15);
+  --amber-border: rgba(200, 131, 10, 0.3);
+}
+
+/* ================================
+   DARK MODE OVERRIDES
+   (things that use hardcoded colors
+   instead of CSS variables)
+================================ */
+
+/* Body and base */
+[data-theme="dark"] body {
+  background-color: #141210;
+  color: #f0ece4;
+}
+
+/* Nav */
+[data-theme="dark"] nav {
+  background: rgba(20, 18, 16, 0.92);
+  border-bottom: 1px solid rgba(240, 236, 228, 0.06);
+}
+
+/* Cards — anything with white background */
+[data-theme="dark"] .step,
+[data-theme="dark"] .who-card,
+[data-theme="dark"] .result-card,
+[data-theme="dark"] .r-card,
+[data-theme="dark"] .not-cs-modal-card {
+  background: #1c1916;
+  border-color: rgba(240, 236, 228, 0.08);
+}
+
+/* Quiz option buttons */
+[data-theme="dark"] .quiz-option {
+  background: #1c1916;
+  border-color: rgba(240, 236, 228, 0.1);
+  color: #f0ece4;
+}
+
+[data-theme="dark"] .quiz-option:hover {
+  border-color: var(--amber);
+  background: var(--amber-light);
+}
+
+[data-theme="dark"] .quiz-option.selected {
+  border-color: var(--amber);
+  background: var(--amber-light);
+}
+
+/* Hero float card */
+[data-theme="dark"] .hero-float-card {
+  background: #1c1916;
+  border-color: rgba(240, 236, 228, 0.08);
+}
+
+/* Why box on landing */
+[data-theme="dark"] .why-box {
+  background: rgba(200, 131, 10, 0.1);
+  border-color: rgba(200, 131, 10, 0.2);
+}
+
+/* Modal */
+[data-theme="dark"] .modal {
+  background: #1c1916;
+  border: 1px solid rgba(240, 236, 228, 0.08);
+}
+
+[data-theme="dark"] .modal-backdrop {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* Tags */
+[data-theme="dark"] .tag {
+  background: rgba(240, 236, 228, 0.07);
+  border-color: rgba(240, 236, 228, 0.12);
+  color: #c8bfb0;
+}
+
+[data-theme="dark"] .role-tag {
+  background: transparent;
+  border-color: rgba(200, 131, 10, 0.35);
+  color: var(--amber);
+}
+
+/* Inputs */
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] textarea {
+  background: #1c1916;
+  border-color: rgba(240, 236, 228, 0.12);
+  color: #f0ece4;
+}
+
+[data-theme="dark"] input[type="email"]::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #8a7a66;
+}
+
+[data-theme="dark"] input[type="email"]:focus,
+[data-theme="dark"] textarea:focus {
+  border-color: var(--amber);
+}
+
+/* Ghost button in dark mode */
+[data-theme="dark"] .btn-ghost {
+  border-color: rgba(240, 236, 228, 0.25);
+  color: #f0ece4;
+}
+
+[data-theme="dark"] .btn-ghost:hover {
+  background: rgba(240, 236, 228, 0.06);
+}
+
+/* Summary screen */
+[data-theme="dark"] .summary-screen {
+  background: #141210;
+}
+
+/* Trait tags */
+[data-theme="dark"] .trait-tag {
+  background: #1c1916;
+  border-color: rgba(200, 131, 10, 0.25);
+  color: #f0ece4;
+}
+
+/* Full loader */
+[data-theme="dark"] .full-loader {
+  background: #141210;
+}
+
+/* Loading overlay */
+[data-theme="dark"] .loading-overlay {
+  background: rgba(20, 18, 16, 0.92);
+}
+
+/* Orbs — slightly adjust for dark */
+[data-theme="dark"] .orb {
+  opacity: 0.4;
+}
+
+/* Step numbers */
+
+/* Section labels */
+[data-theme="dark"] .section-label {
+  color: var(--amber);
+}
+
+/* Who cards — coming soon ones */
+[data-theme="dark"] .who-soon {
+  background: #181512;
+  border-color: rgba(240, 236, 228, 0.05);
+}
+
+/* Final CTA section — match body background */
+[data-theme="dark"] .final-cta {
+  background: var(--cream);
+}
+
+/* Footer */
+[data-theme="dark"] footer {
+  background: #0e0c0a;
+  border-top: 1px solid rgba(240, 236, 228, 0.06);
+}
+
+/* Marquee */
+[data-theme="dark"] .marquee-wrap {
+  background: #1c1916;
+  border-top: 1px solid rgba(240, 236, 228, 0.06);
+  border-bottom: 1px solid rgba(240, 236, 228, 0.06);
+}
+
+/* ================================
+   THEME TOGGLE BUTTON
+================================ */
+.theme-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--cream-alt);
+  border: 1px solid var(--amber-border);
+  color: var(--brown);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  border-color: var(--amber);
+  box-shadow: 0 4px 20px rgba(200, 131, 10, 0.2);
+}
+
+[data-theme="dark"] .theme-toggle {
+  background: #1c1916;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+.theme-icon-light,
+.theme-icon-dark {
+  line-height: 1;
+  pointer-events: none;
+}

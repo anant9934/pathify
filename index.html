@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pathified — Find Your CS Path</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <link rel="stylesheet" href="css/nav.css"/>
+  <link rel="stylesheet" href="css/landing.css"/>
+</head>
+<body>
+
+  <div class="cursor"></div>
+  <div class="cursor-dot"></div>
+
+  <nav>
+    <a href="#" class="logo">Pathified</a>
+    <div class="nav-links">
+      <a href="#how-it-works">How it works</a>
+      <a href="#sample-result">Sample result</a>
+    </div>
+    <button class="btn-nav start-quiz-btn" onclick="window.location.href='quiz.html'">Start the quiz</button>
+  </nav>
+  <hr>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag reveal">For CS students</div>
+      <h1 class="reveal">
+        Still unsure<br>
+        <em>where you're going</em><br>
+        after CS?
+      </h1>
+      <p class="hero-sub reveal">
+        25 deep questions. Real answers.<br>
+        A path built around you and not copied from a template.
+      </p>
+      <div class="hero-btns reveal">
+        <button class="btn-primary start-quiz-btn" onclick="window.location.href='quiz.html'">Find my path &rarr;</button>
+        <button class="btn-ghost" onclick="document.querySelector('#sample-result').scrollIntoView()">See a sample result</button>
+      </div>
+      <p class="not-cs-text reveal">
+        Not from CS?
+        <button class="not-cs-btn" id="not-cs-btn">Click here</button>
+      </p>
+      <div class="hero-float-card reveal">
+        <div class="float-badge">Top match</div>
+        <div class="float-title">AI / Machine Learning</div>
+        <div class="float-pct">92% fit</div>
+      </div>
+    </div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </section>
+
+
+  <div class="modal-overlay" id="not-cs-modal">
+    <div class="not-cs-modal-card">
+      <button class="modal-close" id="not-cs-close" aria-label="Close">&times;</button>
+      <div class="not-cs-icon">🚧</div>
+      <h3>We're building this for you</h3>
+      <p>Pathified is currently built for CS college students. We're working on versions for students from all backgrounds and streams.</p>
+      <p class="not-cs-sub">Drop your email and we'll let you know the moment it's ready.</p>
+      <div class="not-cs-form" id="not-cs-form">
+        <input type="email" id="not-cs-email" placeholder="your@email.com"/>
+        <button class="btn-primary" id="not-cs-submit">Notify me</button>
+      </div>
+      <p class="not-cs-confirm" id="not-cs-confirm">
+        ✓ You're on the list. We'll reach out soon.
+      </p>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+   <hr>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>AI / Machine Learning</span><span class="dot">&bull;</span>
+      <span>Cybersecurity</span><span class="dot">&bull;</span>
+      <span>Data Engineering</span><span class="dot">&bull;</span>
+      <span>Web Development</span><span class="dot">&bull;</span>
+      <span>Cloud &amp; DevOps</span><span class="dot">&bull;</span>
+      <span>Embedded Systems</span><span class="dot">&bull;</span>
+      <span>Game Development</span><span class="dot">&bull;</span>
+      <span>Blockchain</span><span class="dot">&bull;</span>
+      <span>UI / UX Engineering</span><span class="dot">&bull;</span>
+      <span>AI / Machine Learning</span><span class="dot">&bull;</span>
+      <span>Cybersecurity</span><span class="dot">&bull;</span>
+      <span>Data Engineering</span><span class="dot">&bull;</span>
+      <span>Web Development</span><span class="dot">&bull;</span>
+      <span>Cloud &amp; DevOps</span><span class="dot">&bull;</span>
+      <span>Embedded Systems</span><span class="dot">&bull;</span>
+      <span>Game Development</span><span class="dot">&bull;</span>
+      <span>Blockchain</span><span class="dot">&bull;</span>
+      <span>UI / UX Engineering</span><span class="dot">&bull;</span>
+    </div>
+  </div>
+<hr>
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" class="section hiw">
+    <div class="section-header reveal">
+      <div class="section-label">How it works</div>
+      <h2>Three steps.<br>One clear direction.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Answer deep questions</h3>
+        <p>Not surface-level. We ask about how you think, what drains you, and what kind of work actually feels alive to you.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h3>AI builds your profile</h3>
+        <p>Every answer shapes the next question. No two people get the same quiz — it adapts around you in real time.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h3>Get your roadmap</h3>
+        <p>A ranked list of fields, a clear explanation of why they fit you, and a concrete plan to get started today.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section who-for">
+    <div class="section-header reveal">
+      <div class="section-label">Who is this for</div>
+      <h2>Built for students at a crossroads</h2>
+    </div>
+    <div class="who-grid">
+      <article class="who-card who-live reveal">
+        <div class="who-icon">🎓</div>
+        <div class="who-head">
+          <h3>CS College Students</h3>
+          <span class="who-badge who-badge-live">Available now</span>
+        </div>
+        <p>You're in your first or second year, you picked CS but now you're not sure which direction to go. Pathified helps you figure out your specific path before it's too late to choose.</p>
+      </article>
+      <article class="who-card who-soon reveal" aria-disabled="true">
+        <div class="who-icon">📘</div>
+        <div class="who-head">
+          <h3>Class 12 Students</h3>
+          <span class="who-badge who-badge-soon">Coming soon</span>
+        </div>
+        <p>Deciding between engineering branches? Pathified will help you figure out if CS is even right for you before you commit.</p>
+      </article>
+      <article class="who-card who-soon reveal" aria-disabled="true">
+        <div class="who-icon">🧭</div>
+        <div class="who-head">
+          <h3>Class 10 Students</h3>
+          <span class="who-badge who-badge-soon">Coming soon</span>
+        </div>
+        <p>Too early to decide? Not really. Pathified will help you understand your strengths early so you can make the right stream choice.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- RESULT PREVIEW -->
+  <section id="sample-result" class="section result-section">
+    <div class="section-header reveal">
+      <div class="section-label">Sample output</div>
+      <h2>What you'll walk<br>away with</h2>
+    </div>
+    <div class="result-card reveal">
+      <div class="result-top">
+        <div>
+          <div class="result-badge">Sample result</div>
+          <div class="result-name">Yash's Career Profile</div>
+          <div class="result-meta">24 responses &middot; 8 minutes</div>
+        </div>
+        <div class="result-match">
+          <div class="match-num">92%</div>
+          <div class="match-label">top match</div>
+        </div>
+      </div>
+      <div class="paths">
+        <div class="path-item">
+          <div class="path-left">
+            <span class="path-rank">#1</span>
+            <span class="path-name">AI / Machine Learning</span>
+          </div>
+          <div class="path-right">
+            <div class="path-bar"><div class="path-fill animated-bar" data-width="92"></div></div>
+            <span class="path-pct">92%</span>
+          </div>
+        </div>
+        <div class="path-item">
+          <div class="path-left">
+            <span class="path-rank">#2</span>
+            <span class="path-name">Data Engineering</span>
+          </div>
+          <div class="path-right">
+            <div class="path-bar"><div class="path-fill animated-bar" data-width="74"></div></div>
+            <span class="path-pct">74%</span>
+          </div>
+        </div>
+        <div class="path-item">
+          <div class="path-left">
+            <span class="path-rank">#3</span>
+            <span class="path-name">Cybersecurity</span>
+          </div>
+          <div class="path-right">
+            <div class="path-bar"><div class="path-fill animated-bar" data-width="58"></div></div>
+            <span class="path-pct">58%</span>
+          </div>
+        </div>
+      </div>
+      <div class="why-box">
+        <div class="why-label">Why AI / ML fits Yash</div>
+        <div class="why-text">You scored high on abstract thinking, prefer working independently on hard problems, and said financial growth matters to you. AI/ML rewards exactly the kind of deep, focused problem solving you described, and has one of the highest earning ceilings in CS.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="cta-inner reveal">
+      <h2>Your path is waiting.<br><em>Find it in 8 minutes.</em></h2>
+      <p>Free. No signup. Just honest answers.</p>
+      <button class="btn-primary btn-lg start-quiz-btn" onclick="window.location.href='quiz.html'">Start the quiz &rarr;</button>
+    </div>
+  </section>
+
+  <hr>
+
+  <footer>
+    <div class="logo">Pathified</div>
+    <p>Made for CS students who refuse to guess.</p>
+  </footer>
+
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <span class="theme-icon-light">☀︎</span>
+    <span class="theme-icon-dark">☽</span>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

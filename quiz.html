@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pathified — Quiz</title>
+  <meta name="description" content="Answer 20 questions and discover which career paths match your strengths, values, and working style."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <link rel="stylesheet" href="css/nav.css"/>
+  <link rel="stylesheet" href="css/quiz.css"/>
+
+  <style>
+    /* ── Gradient background overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(200, 131, 10, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 100%, rgba(200, 131, 10, 0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Progress bar: styled, visible, not browser default ── */
+    .quiz-progress-wrap {
+      width: 100%;
+      height: 4px;
+      background: rgba(200, 131, 10, 0.12);
+      position: sticky;
+      top: 0;
+      left: 0;
+      z-index: 90;
+      overflow: hidden;
+    }
+
+    #progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #c8830a 0%, #e8a020 100%);
+      border-radius: 0 2px 2px 0;
+      transition: width 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    /* Glow shimmer on progress fill */
+    #progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60px;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+      animation: shimmer-progress 1.6s ease-in-out infinite;
+    }
+
+    @keyframes shimmer-progress {
+      0%   { opacity: 0; transform: translateX(-30px); }
+      50%  { opacity: 1; }
+      100% { opacity: 0; transform: translateX(30px); }
+    }
+
+    /* ── Progress meta: "Question X of 20" ── */
+    .quiz-nav-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem 0;
+    }
+
+    #question-counter {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(200, 131, 10, 0.9);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Skeleton loader ── */
+    .skeleton {
+      background: linear-gradient(90deg,
+        rgba(200, 131, 10, 0.06) 25%,
+        rgba(200, 131, 10, 0.12) 50%,
+        rgba(200, 131, 10, 0.06) 75%
+      );
+      background-size: 200% 100%;
+      animation: skeleton-shimmer 1.4s ease-in-out infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes skeleton-shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-line {
+      height: 1.3rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .skeleton-line--lg {
+      width: 85%;
+      height: 1.5rem;
+      margin: 0 auto 0.6rem;
+    }
+
+    .skeleton-line--md {
+      width: 60%;
+      height: 1.1rem;
+      margin: 0 auto 1.5rem;
+    }
+
+    .skeleton-option {
+      height: 62px;
+      border-radius: 12px;
+    }
+
+    /* ── Mobile responsive ── */
+    @media (max-width: 600px) {
+      .quiz-container {
+        padding: 1rem 1rem 2.5rem;
+        min-height: calc(100vh - 80px);
+        height: auto;
+      }
+
+      .quiz-inner {
+        max-width: 100%;
+        padding: 0.25rem;
+      }
+
+      .quiz-options {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+        max-width: 100%;
+      }
+
+      .quiz-question {
+        font-size: clamp(1rem, 4vw, 1.3rem);
+        margin-bottom: 1.5rem;
+      }
+
+      .quiz-nav-meta {
+        padding: 0.5rem 1rem 0;
+      }
+
+      #question-counter {
+        font-size: 0.72rem;
+      }
+    }
+
+    [data-theme="dark"] #progress-fill {
+      background: linear-gradient(90deg, #c8830a 0%, #d9943a 100%);
+    }
+
+    [data-theme="dark"] .skeleton {
+      background: linear-gradient(90deg,
+        rgba(200, 131, 10, 0.08) 25%,
+        rgba(200, 131, 10, 0.18) 50%,
+        rgba(200, 131, 10, 0.08) 75%
+      );
+      background-size: 200% 100%;
+      animation: skeleton-shimmer 1.4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor"></div>
+  <div class="cursor-dot"></div>
+
+  <nav class="quiz-nav">
+    <a href="index.html" class="logo">Pathified</a>
+  </nav>
+
+  <!-- ── Progress bar: visible, styled, not browser default ── -->
+  <div class="quiz-progress-wrap" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100">
+    <div id="progress-fill"></div>
+  </div>
+
+  <!-- ── Question counter: "Question X of 20" ── -->
+  <div class="quiz-nav-meta">
+    <span id="question-counter">Question 1 of 20</span>
+  </div>
+
+  <section class="quiz-container">
+    <div class="quiz-inner" id="quiz-inner">
+      <!-- Question will be injected here -->
+      <h2 class="quiz-question" id="question-text"></h2>
+
+      <!-- Options will be injected here -->
+      <div class="quiz-options" id="options-container"></div>
+
+      <!-- Optional input for Q26 -->
+      <div class="quiz-optional" id="optional-container">
+        <br>
+        <p class="optional-subtext">Optional — this won't change your score but may add nuance.</p>
+        <textarea id="optional-input" placeholder="Type here..."></textarea>
+        <div class="optional-btns">
+          <button class="btn-primary" id="submit-btn">Submit &amp; see my results</button>
+          <button class="btn-ghost" id="skip-btn">Skip</button>
+        </div>
+      </div>
+
+      <div class="quiz-back-wrap">
+        <button id="back-btn" class="back-link">&#8592; Back</button>
+      </div>
+    </div>
+
+    <div class="summary-screen" id="summary-screen">
+      <div class="summary-inner">
+        <p class="summary-label">Building your profile</p>
+        <h2 class="summary-title">Here's what we found<br><em>about you</em></h2>
+        <div class="traits-container" id="traits-container"></div>
+        <p class="summary-sub">Generating your career matches...</p>
+      </div>
+    </div>
+
+    <!-- Loading overlay inside quiz area -->
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="pixel-loader">
+        <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+        <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+        <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+      </div>
+      <div class="loading-text" id="loading-text">Reading between the lines...</div>
+    </div>
+
+    <!-- Full page loader for final submission -->
+    <div class="full-loader" id="full-loader">
+      <div class="orb orb1"></div>
+      <div class="orb orb3"></div>
+      <div class="pixel-loader">
+        <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+        <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+        <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+      </div>
+      <div class="loading-text">Synthesizing your profile...</div>
+    </div>
+
+  </section>
+
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <span class="theme-icon-light">☀︎</span>
+    <span class="theme-icon-dark">☽</span>
+  </button>
+
+  <script src="script.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>
